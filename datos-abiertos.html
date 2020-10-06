@@ -31,6 +31,7 @@
     </style>
     <!-- Custom styles for this template -->
     <link href="navbar-top.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   </head>
   <body>
     <nav class="navbar fixed-top navbar-dark navbar-expand-md mb-4" style="background-color:blueviolet;">
@@ -59,7 +60,15 @@
 <main role="main" class="container">
  <br>
  <br>
-   
+ <p><h2>Casos Positivos en Colombia</h2>
+    
+    Los casos se obtienen de la fuente de datos abierta https://www.datos.gov.co/Salud-y-Protecci-n-Social/Casos-positivos-deCOVID-19-en-Colombia/gt2j-8ykr
+    
+ </p>
+ <div id="datosPersona">
+
+    <table id="Table"></table>
+    </div>
 <br>
 </main>
 <footer class="page-footer font-small pt-4 bg-dark" style="color: white;">
@@ -127,6 +136,75 @@
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
       <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
-
+      <script>
+        var json={"personas":[{"id_de_caso":"1","fecha_de_notificaci_n":"2020-03-02T00:00:00.000","c_digo_divipola":"11001","ciudad_de_ubicaci_n":"Bogotá D.C.","departamento":"Bogotá D.C.","atenci_n":"Recuperado","edad":"19","sexo":"F","tipo":"Importado","estado":"Leve","pa_s_de_procedencia":"ITALIA","fis":"2020-02-27T00:00:00.000","fecha_diagnostico":"2020-03-06T00:00:00.000","fecha_recuperado":"2020-03-13T00:00:00.000","fecha_reporte_web":"2020-03-06T00:00:00.000","tipo_recuperaci_n":"PCR","codigo_departamento":"11","codigo_pais":"380","pertenencia_etnica":"Otro","ubicaci_n_recuperado":"Casa"}
+      ,{"id_de_caso":"2","fecha_de_notificaci_n":"2020-03-06T00:00:00.000","c_digo_divipola":"76111","ciudad_de_ubicaci_n":"Guadalajara de Buga","departamento":"Valle del Cauca","atenci_n":"Recuperado","edad":"34","sexo":"M","tipo":"Importado","estado":"Leve","pa_s_de_procedencia":"ESPAÑA","fis":"2020-03-04T00:00:00.000","fecha_diagnostico":"2020-03-09T00:00:00.000","fecha_recuperado":"2020-03-19T00:00:00.000","fecha_reporte_web":"2020-03-09T00:00:00.000","tipo_recuperaci_n":"PCR","codigo_departamento":"76","codigo_pais":"724","pertenencia_etnica":"Negro","ubicaci_n_recuperado":"Casa"}
+      ,{"id_de_caso":"3","fecha_de_notificaci_n":"2020-03-07T00:00:00.000","c_digo_divipola":"05001","ciudad_de_ubicaci_n":"Medellín","departamento":"Antioquia","atenci_n":"Recuperado","edad":"50","sexo":"F","tipo":"Importado","estado":"Leve","pa_s_de_procedencia":"ESPAÑA","fis":"2020-02-29T00:00:00.000","fecha_diagnostico":"2020-03-09T00:00:00.000","fecha_recuperado":"2020-03-15T00:00:00.000","fecha_reporte_web":"2020-03-09T00:00:00.000","tipo_recuperaci_n":"PCR","codigo_departamento":"5","codigo_pais":"724","pertenencia_etnica":"Otro","ubicaci_n_recuperado":"Casa"}
+      ,{"id_de_caso":"4","fecha_de_notificaci_n":"2020-03-09T00:00:00.000","c_digo_divipola":"05001","ciudad_de_ubicaci_n":"Medellín","departamento":"Antioquia","atenci_n":"Recuperado","edad":"55","sexo":"M","tipo":"Relacionado","estado":"Leve","fis":"2020-03-06T00:00:00.000","fecha_diagnostico":"2020-03-11T00:00:00.000","fecha_recuperado":"2020-03-26T00:00:00.000","fecha_reporte_web":"2020-03-11T00:00:00.000","tipo_recuperaci_n":"PCR","codigo_departamento":"5","pertenencia_etnica":"Otro","ubicaci_n_recuperado":"Casa"}
+      ,{"id_de_caso":"5","fecha_de_notificaci_n":"2020-03-09T00:00:00.000","c_digo_divipola":"05001","ciudad_de_ubicaci_n":"Medellín","departamento":"Antioquia","atenci_n":"Recuperado","edad":"25","sexo":"M","tipo":"Relacionado","estado":"Leve","fis":"2020-03-08T00:00:00.000","fecha_diagnostico":"2020-03-11T00:00:00.000","fecha_recuperado":"2020-03-23T00:00:00.000","fecha_reporte_web":"2020-03-11T00:00:00.000","tipo_recuperaci_n":"PCR","codigo_departamento":"5","pertenencia_etnica":"Otro","ubicaci_n_recuperado":"Casa"}
+      ,{"id_de_caso":"6","fecha_de_notificaci_n":"2020-03-10T00:00:00.000","c_digo_divipola":"05360","ciudad_de_ubicaci_n":"Itagüí","departamento":"Antioquia","atenci_n":"Recuperado","edad":"27","sexo":"F","tipo":"Relacionado","estado":"Leve","fis":"2020-03-06T00:00:00.000","fecha_diagnostico":"2020-03-11T00:00:00.000","fecha_recuperado":"2020-03-26T00:00:00.000","fecha_reporte_web":"2020-03-11T00:00:00.000","tipo_recuperaci_n":"PCR","codigo_departamento":"5","pertenencia_etnica":"Otro","ubicaci_n_recuperado":"Casa"}
+      ,{"id_de_caso":"7","fecha_de_notificaci_n":"2020-03-08T00:00:00.000","c_digo_divipola":"13001","ciudad_de_ubicaci_n":"Cartagena de Indias","departamento":"Cartagena D.T. y C.","atenci_n":"Recuperado","edad":"85","sexo":"F","tipo":"Importado","estado":"Leve","pa_s_de_procedencia":"ESTADOS UNIDOS","fis":"2020-03-02T00:00:00.000","fecha_diagnostico":"2020-03-11T00:00:00.000","fecha_recuperado":"2020-03-17T00:00:00.000","fecha_reporte_web":"2020-03-11T00:00:00.000","tipo_recuperaci_n":"PCR","codigo_departamento":"13","codigo_pais":"840","pertenencia_etnica":"Otro","ubicaci_n_recuperado":"Casa"}
+      ,{"id_de_caso":"8","fecha_de_notificaci_n":"2020-03-09T00:00:00.000","c_digo_divipola":"11001","ciudad_de_ubicaci_n":"Bogotá D.C.","departamento":"Bogotá D.C.","atenci_n":"Recuperado","edad":"22","sexo":"F","tipo":"Importado","estado":"Leve","pa_s_de_procedencia":"ESPAÑA","fis":"2020-03-06T00:00:00.000","fecha_diagnostico":"2020-03-11T00:00:00.000","fecha_recuperado":"2020-03-21T00:00:00.000","fecha_reporte_web":"2020-03-11T00:00:00.000","tipo_recuperaci_n":"PCR","codigo_departamento":"11","codigo_pais":"724","pertenencia_etnica":"Otro","ubicaci_n_recuperado":"Casa"}
+      ,{"id_de_caso":"9","fecha_de_notificaci_n":"2020-03-08T00:00:00.000","c_digo_divipola":"11001","ciudad_de_ubicaci_n":"Bogotá D.C.","departamento":"Bogotá D.C.","atenci_n":"Recuperado","edad":"28","sexo":"F","tipo":"Importado","estado":"Leve","pa_s_de_procedencia":"ESPAÑA","fis":"2020-03-07T00:00:00.000","fecha_diagnostico":"2020-03-11T00:00:00.000","fecha_recuperado":"2020-03-23T00:00:00.000","fecha_reporte_web":"2020-03-11T00:00:00.000","tipo_recuperaci_n":"PCR","codigo_departamento":"11","codigo_pais":"724","pertenencia_etnica":"Otro","ubicaci_n_recuperado":"Casa"}
+      ,{"id_de_caso":"10","fecha_de_notificaci_n":"2020-03-12T00:00:00.000","c_digo_divipola":"11001","ciudad_de_ubicaci_n":"Bogotá D.C.","departamento":"Bogotá D.C.","atenci_n":"Recuperado","edad":"36","sexo":"F","tipo":"Importado","estado":"Leve","pa_s_de_procedencia":"ESPAÑA","fis":"2020-03-06T00:00:00.000","fecha_diagnostico":"2020-03-12T00:00:00.000","fecha_recuperado":"2020-03-21T00:00:00.000","fecha_reporte_web":"2020-03-12T00:00:00.000","tipo_recuperaci_n":"PCR","codigo_departamento":"11","codigo_pais":"724","pertenencia_etnica":"Otro","ubicaci_n_recuperado":"Casa"}
+      ,{"id_de_caso":"11","fecha_de_notificaci_n":"2020-03-11T00:00:00.000","c_digo_divipola":"11001","ciudad_de_ubicaci_n":"Bogotá D.C.","departamento":"Bogotá D.C.","atenci_n":"Recuperado","edad":"42","sexo":"F","tipo":"Importado","estado":"Leve","pa_s_de_procedencia":"ESPAÑA","fis":"2020-03-06T00:00:00.000","fecha_diagnostico":"2020-03-12T00:00:00.000","fecha_recuperado":"2020-03-31T00:00:00.000","fecha_reporte_web":"2020-03-12T00:00:00.000","tipo_recuperaci_n":"PCR","codigo_departamento":"11","codigo_pais":"724","pertenencia_etnica":"Otro","ubicaci_n_recuperado":"Casa"}
+      ,{"id_de_caso":"12","fecha_de_notificaci_n":"2020-03-10T00:00:00.000","c_digo_divipola":"41001","ciudad_de_ubicaci_n":"Neiva","departamento":"Huila","atenci_n":"Recuperado","edad":"74","sexo":"F","tipo":"Importado","estado":"Leve","pa_s_de_procedencia":"ITALIA","fis":"2020-03-06T00:00:00.000","fecha_diagnostico":"2020-03-12T00:00:00.000","fecha_recuperado":"2020-04-09T00:00:00.000","fecha_reporte_web":"2020-03-12T00:00:00.000","tipo_recuperaci_n":"PCR","codigo_departamento":"41","codigo_pais":"380","pertenencia_etnica":"Otro","ubicaci_n_recuperado":"Casa"}
+      ,{"id_de_caso":"13","fecha_de_notificaci_n":"2020-03-10T00:00:00.000","c_digo_divipola":"41001","ciudad_de_ubicaci_n":"Neiva","departamento":"Huila","atenci_n":"Recuperado","edad":"68","sexo":"F","tipo":"Relacionado","estado":"Leve","fis":"2020-03-06T00:00:00.000","fecha_diagnostico":"2020-03-12T00:00:00.000","fecha_recuperado":"2020-03-30T00:00:00.000","fecha_reporte_web":"2020-03-12T00:00:00.000","tipo_recuperaci_n":"PCR","codigo_departamento":"41","pertenencia_etnica":"Otro","ubicaci_n_recuperado":"Casa"}
+      ,{"id_de_caso":"14","fecha_de_notificaci_n":"2020-03-10T00:00:00.000","c_digo_divipola":"76520","ciudad_de_ubicaci_n":"Palmira","departamento":"Valle del Cauca","atenci_n":"Recuperado","edad":"48","sexo":"M","tipo":"Importado","estado":"Leve","pa_s_de_procedencia":"ESPAÑA","fis":"2020-03-07T00:00:00.000","fecha_diagnostico":"2020-03-13T00:00:00.000","fecha_recuperado":"2020-03-21T00:00:00.000","fecha_reporte_web":"2020-03-13T00:00:00.000","tipo_recuperaci_n":"PCR","codigo_departamento":"76","codigo_pais":"724","pertenencia_etnica":"Negro","ubicaci_n_recuperado":"Casa"}
+      ,{"id_de_caso":"15","fecha_de_notificaci_n":"2020-03-13T00:00:00.000","c_digo_divipola":"50001","ciudad_de_ubicaci_n":"Villavicencio","departamento":"Meta","atenci_n":"Recuperado","edad":"30","sexo":"F","tipo":"Importado","estado":"Leve","pa_s_de_procedencia":"ESPAÑA","fis":"2020-03-09T00:00:00.000","fecha_diagnostico":"2020-03-13T00:00:00.000","fecha_recuperado":"2020-03-23T00:00:00.000","fecha_reporte_web":"2020-03-13T00:00:00.000","tipo_recuperaci_n":"PCR","codigo_departamento":"50","codigo_pais":"724","pertenencia_etnica":"Otro","ubicaci_n_recuperado":"Casa"}
+      ,{"id_de_caso":"16","fecha_de_notificaci_n":"2020-03-11T00:00:00.000","c_digo_divipola":"11001","ciudad_de_ubicaci_n":"Bogotá D.C.","departamento":"Bogotá D.C.","atenci_n":"Recuperado","edad":"61","sexo":"F","tipo":"Importado","estado":"Leve","pa_s_de_procedencia":"ITALIA","fis":"2020-03-08T00:00:00.000","fecha_diagnostico":"2020-03-13T00:00:00.000","fecha_recuperado":"2020-03-23T00:00:00.000","fecha_reporte_web":"2020-03-13T00:00:00.000","tipo_recuperaci_n":"PCR","codigo_departamento":"11","codigo_pais":"380","pertenencia_etnica":"Negro","ubicaci_n_recuperado":"Casa"}
+      ,{"id_de_caso":"17","fecha_de_notificaci_n":"2020-03-11T00:00:00.000","c_digo_divipola":"11001","ciudad_de_ubicaci_n":"Bogotá D.C.","departamento":"Bogotá D.C.","atenci_n":"Recuperado","edad":"73","sexo":"F","tipo":"Importado","estado":"Leve","pa_s_de_procedencia":"ESPAÑA","fis":"2020-02-28T00:00:00.000","fecha_diagnostico":"2020-03-14T00:00:00.000","fecha_recuperado":"2020-03-14T00:00:00.000","fecha_reporte_web":"2020-03-14T00:00:00.000","tipo_recuperaci_n":"PCR","codigo_departamento":"11","codigo_pais":"724","pertenencia_etnica":"Otro","ubicaci_n_recuperado":"Casa"}
+      ,{"id_de_caso":"18","fecha_de_notificaci_n":"2020-03-11T00:00:00.000","c_digo_divipola":"11001","ciudad_de_ubicaci_n":"Bogotá D.C.","departamento":"Bogotá D.C.","atenci_n":"Recuperado","edad":"54","sexo":"M","tipo":"Importado","estado":"Leve","pa_s_de_procedencia":"ESPAÑA","fis":"2020-03-07T00:00:00.000","fecha_diagnostico":"2020-03-14T00:00:00.000","fecha_recuperado":"2020-04-07T00:00:00.000","fecha_reporte_web":"2020-03-14T00:00:00.000","tipo_recuperaci_n":"Tiempo","codigo_departamento":"11","codigo_pais":"724","pertenencia_etnica":"Otro","ubicaci_n_recuperado":"Casa"}
+      ,{"id_de_caso":"19","fecha_de_notificaci_n":"2020-03-12T00:00:00.000","c_digo_divipola":"11001","ciudad_de_ubicaci_n":"Bogotá D.C.","departamento":"Bogotá D.C.","atenci_n":"Recuperado","edad":"54","sexo":"F","tipo":"Relacionado","estado":"Leve","fis":"2020-03-09T00:00:00.000","fecha_diagnostico":"2020-03-14T00:00:00.000","fecha_recuperado":"2020-03-24T00:00:00.000","fecha_reporte_web":"2020-03-14T00:00:00.000","tipo_recuperaci_n":"PCR","codigo_departamento":"11","pertenencia_etnica":"Otro","ubicaci_n_recuperado":"Casa"}
+      ,{"id_de_caso":"20","fecha_de_notificaci_n":"2020-03-11T00:00:00.000","c_digo_divipola":"05001","ciudad_de_ubicaci_n":"Medellín","departamento":"Antioquia","atenci_n":"Recuperado","edad":"26","sexo":"F","tipo":"Relacionado","estado":"Leve","fis":"2020-03-09T00:00:00.000","fecha_diagnostico":"2020-03-14T00:00:00.000","fecha_recuperado":"2020-03-24T00:00:00.000","fecha_reporte_web":"2020-03-14T00:00:00.000","tipo_recuperaci_n":"PCR","codigo_departamento":"5","pertenencia_etnica":"Otro","ubicaci_n_recuperado":"Casa"}
+      ,{"id_de_caso":"21","fecha_de_notificaci_n":"2020-03-11T00:00:00.000","c_digo_divipola":"05001","ciudad_de_ubicaci_n":"Medellín","departamento":"Antioquia","atenci_n":"Recuperado","edad":"28","sexo":"M","tipo":"Relacionado","estado":"Leve","fis":"2020-03-10T00:00:00.000","fecha_diagnostico":"2020-03-14T00:00:00.000","fecha_recuperado":"2020-04-10T00:00:00.000","fecha_reporte_web":"2020-03-14T00:00:00.000","tipo_recuperaci_n":"PCR","codigo_departamento":"5","pertenencia_etnica":"Otro","ubicaci_n_recuperado":"Casa"}
+      ,{"id_de_caso":"22","fecha_de_notificaci_n":"2020-03-12T00:00:00.000","c_digo_divipola":"05615","ciudad_de_ubicaci_n":"Rionegro","departamento":"Antioquia","atenci_n":"Recuperado","edad":"36","sexo":"M","tipo":"Importado","estado":"Leve","pa_s_de_procedencia":"ESTADOS UNIDOS","fis":"2020-03-09T00:00:00.000","fecha_diagnostico":"2020-03-14T00:00:00.000","fecha_recuperado":"2020-03-24T00:00:00.000","fecha_reporte_web":"2020-03-14T00:00:00.000","tipo_recuperaci_n":"PCR","codigo_departamento":"5","codigo_pais":"840","pertenencia_etnica":"Otro","ubicaci_n_recuperado":"Casa"}
+      ,{"id_de_caso":"23","fecha_de_notificaci_n":"2020-03-12T00:00:00.000","c_digo_divipola":"11001","ciudad_de_ubicaci_n":"Bogotá D.C.","departamento":"Bogotá D.C.","atenci_n":"Recuperado","edad":"23","sexo":"M","tipo":"Relacionado","estado":"Leve","fis":"2020-03-08T00:00:00.000","fecha_diagnostico":"2020-03-14T00:00:00.000","fecha_recuperado":"2020-03-23T00:00:00.000","fecha_reporte_web":"2020-03-14T00:00:00.000","tipo_recuperaci_n":"PCR","codigo_departamento":"11","pertenencia_etnica":"Otro","ubicaci_n_recuperado":"Casa"}
+      ,{"id_de_caso":"24","fecha_de_notificaci_n":"2020-03-12T00:00:00.000","c_digo_divipola":"11001","ciudad_de_ubicaci_n":"Bogotá D.C.","departamento":"Bogotá D.C.","atenci_n":"Recuperado","edad":"18","sexo":"F","tipo":"Importado","estado":"Leve","pa_s_de_procedencia":"ESPAÑA","fis":"2020-03-12T00:00:00.000","fecha_diagnostico":"2020-03-14T00:00:00.000","fecha_recuperado":"2020-03-27T00:00:00.000","fecha_reporte_web":"2020-03-14T00:00:00.000","tipo_recuperaci_n":"PCR","codigo_departamento":"11","codigo_pais":"724","pertenencia_etnica":"Otro","ubicaci_n_recuperado":"Casa"}
+      ,{"id_de_caso":"25","fecha_de_notificaci_n":"2020-03-13T00:00:00.000","c_digo_divipola":"76001","ciudad_de_ubicaci_n":"Cali","departamento":"Valle del Cauca","atenci_n":"Recuperado","edad":"49","sexo":"M","tipo":"Importado","estado":"Leve","pa_s_de_procedencia":"ESPAÑA","fis":"2020-03-10T00:00:00.000","fecha_diagnostico":"2020-03-13T00:00:00.000","fecha_recuperado":"2020-05-12T00:00:00.000","fecha_reporte_web":"2020-03-13T00:00:00.000","tipo_recuperaci_n":"PCR","codigo_departamento":"76","codigo_pais":"724","pertenencia_etnica":"Otro","ubicaci_n_recuperado":"Casa"}]};
+      
+      var DatosJson = JSON.parse(JSON.stringify(json));
+          console.log(DatosJson.personas.length);
+          $("#Table").append('<tr><td>ID Caso</td>'+
+          '<td>Fecha de Notificacion</td>' + 
+          '<td>Codigo DIVIPOLA</td>'+
+          '<td>Ciudad</td>'+
+          '<td>Departamento</td>'+
+          '<td>Atencion</td>'+
+          '<td>Edad</td>'+
+          '<td>Sexo</td>'+
+          '<td>Tipo</td>'+
+          '<td>Estado</td>'+
+          '<td>Pais</td>'+
+          '<td>FIS</td>'+
+          '<td>Fecha de Diagnostico</td>'+
+          '<td>Fecha de recuperacion</td>'+
+          '<td>Tipo de Recuperacion</td>'+
+          '<td>Codigo Departamento</td>'+
+          '<td>Pertenecia Etnica</td>'+
+          '<td>Ubicacion recuperados</td>');
+          for (i = 0; i < DatosJson.personas.length; i++){
+      
+       $("#Table").append('<tr>' + 
+          '<td align="center" style="dislay: none;">' + DatosJson.personas[i].id_de_caso + '</td>'+
+          '<td align="center" style="dislay: none;">' + DatosJson.personas[i].fecha_de_notificaci_n + '</td>'+
+          '<td align="center" style="dislay: none;">' + DatosJson.personas[i].c_digo_divipola + '</td>'+
+          '<td align="center" style="dislay: none;">' + DatosJson.personas[i].ciudad_de_ubicaci_n + '</td>'+
+          '<td align="center" style="dislay: none;">' + DatosJson.personas[i].departamento + '</td>'+
+          '<td align="center" style="dislay: none;">' + DatosJson.personas[i].atenci_n + '</td>'+
+          '<td align="center" style="dislay: none;">' + DatosJson.personas[i].edad + '</td>'+
+          '<td align="center" style="dislay: none;">' + DatosJson.personas[i].sexo + '</td>'+
+          '<td align="center" style="dislay: none;">' + DatosJson.personas[i].tipo + '</td>'+
+          '<td align="center" style="dislay: none;">' + DatosJson.personas[i].estado + '</td>'+
+          '<td align="center" style="dislay: none;">' + DatosJson.personas[i].pa_s_de_procedencia + '</td>'+
+          '<td align="center" style="dislay: none;">' + DatosJson.personas[i].fis + '</td>'+
+          '<td align="center" style="dislay: none;">' + DatosJson.personas[i].fecha_diagnostico + '</td>'+
+          '<td align="center" style="dislay: none;">' + DatosJson.personas[i].fecha_recuperado + '</td>'+
+          '<td align="center" style="dislay: none;">' + DatosJson.personas[i].tipo_recuperaci_n + '</td>'+
+          '<td align="center" style="dislay: none;">' + DatosJson.personas[i].codigo_departamento + '</td>'+
+          '<td align="center" style="dislay: none;">' + DatosJson.personas[i].pertenencia_etnica + '</td>'+
+          '<td align="center" style="dislay: none;">' + DatosJson.personas[i].ubicaci_n_recuperado + '</td>'+'</tr>');
+          }
+      </script>
 </html>
  
